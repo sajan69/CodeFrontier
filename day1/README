@@ -1,0 +1,34 @@
+# Day 1 - Understanding Document Structure in HTML5
+
+## Overview
+In this article, we cover the basics of setting up an HTML5 document structure. We'll go through the following key concepts:
+- Basic HTML structure
+- Head and body elements
+- Text elements like headings and paragraphs
+- Lists and links
+- Using attributes for enhanced functionality
+
+## What You Will Learn
+- How to create a basic HTML document with headings, lists, and links
+- How to structure the content using HTML5
+- How to use common attributes like `href` and `src`
+
+## Exercise
+1. Create a new HTML file (`index.html`) and copy the structure above.
+2. Modify the page by adding:
+   - A second heading using `<h2>`.
+   - Two additional links with meaningful descriptions.
+   - An ordered list with at least three items.
+
+Once done, open the `index.html` file in your browser to see the page!
+
+## Next Steps
+In the following days, we’ll dive into forms, media elements, and more advanced HTML5 topics. Stay tuned!
+
+## Resources
+- [HTML5 Documentation (MDN)](https://developer.mozilla.org/en-US/docs/Web/HTML)
+- [W3Schools HTML Tutorial](https://www.w3schools.com/html/)
+
+---
+
+#webdev #HTML5 #coding
