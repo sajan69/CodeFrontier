@@ -1,0 +1,18 @@
+# Day 2: HTML5 Forms and Input Elements
+
+This is the code repository for **Day 2** of the **31 Days of Web Development** series. Today, we explored **HTML5 forms** and various **input elements** such as text, email, password, radio buttons, checkboxes, and more.
+
+## How to Run
+1. Clone this repository to your local machine.
+2. Open `form.html` in your browser.
+
+## Key Concepts Covered
+- The structure of a basic HTML form
+- Different types of input fields: text, email, password, radio buttons, checkboxes, and more
+- HTML5 form validation using attributes like `required`, `min`, `max`, and `pattern`
+- A simple user registration form example
+
+Stay tuned for **Day 3**, where we will explore working with multimedia in HTML5!
+
+## Resources
+- [HTML5 Forms Documentation (MDN)](https://developer.mozilla.org/en-US/docs/Learn/Forms)
