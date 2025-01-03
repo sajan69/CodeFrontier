@@ -16,6 +16,7 @@ Are you ready to elevate your web development skills? Join me for a transformati
 The repository is organized as follows:
 - **Day1/**: Add Day 1 HTML5 structure ([commit](https://github.com/sajan69/CodeFrontier/commit/0abe5076f658290a33b2fe71dda5d7ea67c3743e))
 - **Day2/**: HTML5 Forms and Input Elements ([commit](https://github.com/sajan69/CodeFrontier/commit/445e6e3ebec10b1457dbbd918178b2d444d23486))
+- **Day3/**: Media Elements in HTML5 ([commit](https://github.com/sajan69/CodeFrontier/commit/64fe5333abbe341b1b774c010106881f192f0c87))
 
 ## Getting Started
 
