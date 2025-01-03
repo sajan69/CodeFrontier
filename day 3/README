@@ -1,0 +1,30 @@
+# Day 3: Media Elements in HTML5
+
+This project demonstrates how to use HTML5 media elements, such as `<audio>` and `<video>`, to add multimedia content to your webpage. It also includes an example of embedding external content like YouTube videos.
+
+## Features
+- Audio playback using the `<audio>` tag.
+- Video playback with the `<video>` tag and fallback content for unsupported browsers.
+- Embedding content from external sources using `<iframe>`.
+
+## Instructions
+1. Clone the repository.
+   ```bash
+   git clone https://github.com/sajan69/CodeFrontier
+   cd day 3
+   ```
+2. Open `multimedia.html` in your browser to view the example.
+
+## Files
+- `multimedia.html`: The main HTML file containing examples of media elements.
+- Placeholder media files (`sample-audio.mp3`, `sample-video.mp4`, `video-poster.jpg`) can be replaced with actual content for testing.
+
+## What's Next?
+Tomorrow, we’ll explore **Semantic Elements** in HTML5 to enhance accessibility and SEO while structuring web content effectively.
+
+
+## Resources
+- [HTML5 Audio Documentation (MDN)](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio)
+- [HTML5 Video Documentation (MDN)](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video)
+
+

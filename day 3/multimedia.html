@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML5 Media Elements</title>
+</head>
+<body>
+  <h1>HTML5 Media Elements Example</h1>
+
+  <!-- Audio Section -->
+  <h2>Audio Example</h2>
+  <audio controls>
+    <source src="sample-audio.mp3" type="audio/mpeg">
+    Your browser does not support the audio element. Please download the audio file to listen: 
+    <a href="sample-audio.mp3">Download Audio</a>
+  </audio>
+
+  <!-- Video Section -->
+  <h2>Video Example</h2>
+  <video controls width="600" poster="video-poster.jpg">
+    <source src="sample-video.mp4" type="video/mp4">
+    <source src="sample-video.webm" type="video/webm">
+    Your browser does not support the video element. Please download the video file to watch: 
+    <a href="sample-video.mp4">Download Video</a>
+  </video>
+
+  <!-- Embedding Content -->
+  <h2>Embedding Example</h2>
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/pi6QU4kgRXA" 
+    title="YouTube video player" frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+  </iframe>
+
+</body>
+</html>
