@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML5 Templates Example</title>
+</head>
+<body>
+  <h1>HTML5 Template Example</h1>
+
+  <!-- Template Definition -->
+  <template id="product-template">
+    <div class="product">
+      <h2 class="product-name"></h2>
+      <p class="product-description"></p>
+    </div>
+  </template>
+
+  <!-- Dynamic Content -->
+  <div id="product-list"></div>
+
+  <script>
+    const template = document.getElementById("product-template");
+    const productList = document.getElementById("product-list");
+
+    const products = [
+      { name: "Laptop", description: "High-performance laptop for professionals." },
+      { name: "Smartphone", description: "Latest model with incredible features." },
+      { name: "Headphones", description: "Noise-cancelling, wireless headphones." },
+    ];
+
+    products.forEach(product => {
+      const productClone = template.content.cloneNode(true);
+      productClone.querySelector(".product-name").textContent = product.name;
+      productClone.querySelector(".product-description").textContent = product.description;
+      productList.appendChild(productClone);
+    });
+  </script>
+</body>
+</html>

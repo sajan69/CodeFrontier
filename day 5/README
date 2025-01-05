@@ -1,0 +1,26 @@
+# Day 5: Advanced Features of HTML
+
+This repository demonstrates the **advanced features of HTML5**, focusing on **templates** and **Shadow DOM** to create reusable and modular components.
+
+## **1. Features Covered**
+- **Templates**: Define reusable HTML blocks using the `<template>` tag.
+- **Shadow DOM**: Encapsulate styles and logic for modular components.
+
+## **2. Files**
+### `templates.html`
+- Demonstrates the use of HTML5 templates to generate dynamic content.
+- Example: A product listing page created using a predefined `<template>`.
+
+### `shadow-dom.html`
+- Demonstrates how to use the Shadow DOM for encapsulating styles and HTML structure.
+- Example: Custom styles applied within a shadow root.
+
+## **3. How to Use**
+1. Clone the repository:
+
+2. Open the files in your browser:
+   - `templates.html`: Shows how templates can generate a dynamic product list.
+   - `shadow-dom.html`: Demonstrates the Shadow DOM in action.
+
+## **4. What's Next?**
+We’re wrapping up the HTML section and moving into **CSS**. Get ready to style your pages starting with **CSS Fundamentals** in Day 6!

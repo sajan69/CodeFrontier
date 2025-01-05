@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shadow DOM Example</title>
+</head>
+<body>
+  <h1>Shadow DOM Example</h1>
+
+  <!-- Host Element -->
+  <div id="shadow-host"></div>
+
+  <script>
+    const host = document.getElementById("shadow-host");
+
+    // Attach Shadow DOM
+    const shadowRoot = host.attachShadow({ mode: "open" });
+
+    // Shadow DOM Content
+    shadowRoot.innerHTML = `
+      <style>
+        h2 {
+          color: teal;
+        }
+        p {
+          font-size: 16px;
+        }
+      </style>
+      <h2>Inside Shadow DOM</h2>
+      <p>This content is encapsulated within the Shadow DOM.</p>
+    `;
+  </script>
+</body>
+</html>
