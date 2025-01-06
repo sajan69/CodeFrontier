@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Layout - Dashboard Example</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="https://via.placeholder.com/50" alt="Logo">
+                <span>Dashboard</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active">Overview</a></li>
+                <li><a href="#">Analytics</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </nav>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <div class="search-bar">
+                    <input type="search" placeholder="Search...">
+                </div>
+                <div class="user-profile">
+                    <img src="https://via.placeholder.com/40" alt="User">
+                    <span>John Doe</span>
+                </div>
+            </header>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                <!-- Stats Cards -->
+                <div class="card stats-card">
+                    <h3>Total Users</h3>
+                    <p class="number">1,234</p>
+                    <span class="trend positive">+12%</span>
+                </div>
+                <div class="card stats-card">
+                    <h3>Revenue</h3>
+                    <p class="number">$45,678</p>
+                    <span class="trend positive">+8%</span>
+                </div>
+                <div class="card stats-card">
+                    <h3>Active Sessions</h3>
+                    <p class="number">892</p>
+                    <span class="trend negative">-3%</span>
+                </div>
+
+                <!-- Chart Card -->
+                <div class="card chart-card">
+                    <h3>Monthly Trends</h3>
+                    <div class="chart-placeholder"></div>
+                </div>
+
+                <!-- Activity Card -->
+                <div class="card activity-card">
+                    <h3>Recent Activity</h3>
+                    <ul class="activity-list">
+                        <li>New user registration</li>
+                        <li>Payment received</li>
+                        <li>System update completed</li>
+                    </ul>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html> 

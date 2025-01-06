@@ -1,0 +1,181 @@
+/* CSS Reset and Variables */
+:root {
+    --primary-color: #4a90e2;
+    --secondary-color: #f5f6fa;
+    --text-color: #2d3436;
+    --success-color: #2ecc71;
+    --danger-color: #e74c3c;
+    --sidebar-width: 250px;
+    --header-height: 60px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    color: var(--text-color);
+    background-color: var(--secondary-color);
+}
+
+/* Dashboard Layout using Grid */
+.dashboard {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    min-height: 100vh;
+}
+
+/* Sidebar using Flexbox */
+.sidebar {
+    background-color: white;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    border-right: 1px solid #eee;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nav-links a {
+    display: flex;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: var(--text-color);
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+/* Header using Flexbox */
+.header {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    height: var(--header-height);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+}
+
+.search-bar input {
+    padding: 0.5rem 1rem;
+    border: 1px solid #eee;
+    border-radius: 0.5rem;
+    width: 300px;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* Dashboard Grid Layout */
+.dashboard-grid {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    container-type: inline-size;
+}
+
+/* Cards */
+.card {
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.stats-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.number {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.trend {
+    font-size: 0.875rem;
+}
+
+.trend.positive { color: var(--success-color); }
+.trend.negative { color: var(--danger-color); }
+
+.chart-card {
+    grid-column: span 2;
+}
+
+.chart-placeholder {
+    height: 300px;
+    background-color: var(--secondary-color);
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+
+.activity-list {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.activity-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* Responsive Design */
+@container (max-width: 700px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .chart-card {
+        grid-column: span 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -100%;
+        top: 0;
+        bottom: 0;
+        width: var(--sidebar-width);
+        z-index: 100;
+        transition: left 0.3s;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+} 
