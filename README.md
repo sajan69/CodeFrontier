@@ -18,6 +18,7 @@ The repository is organized as follows:
 - **Day2/**: HTML5 Forms and Input Elements ([commit](https://github.com/sajan69/CodeFrontier/commit/445e6e3ebec10b1457dbbd918178b2d444d23486))
 - **Day3/**: Media Elements in HTML5 ([commit](https://github.com/sajan69/CodeFrontier/commit/64fe5333abbe341b1b774c010106881f192f0c87))
 - **Day4/**: Semantic HTML5 Elements ([commit](https://github.com/sajan69/CodeFrontier/commit/528ce8f87ea4dffdded6c606f9b7acf0ac345d3e))
+- **Day5/**: Advanced Features of HTML ([commit](https://github.com/sajan69/CodeFrontier/commit/f182305d78ace641d825f98dc2ff1917dc5f86d0))
 
 ## Getting Started
 
