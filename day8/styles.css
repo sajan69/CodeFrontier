@@ -1,0 +1,169 @@
+/* CSS Variables */
+:root {
+    /* Light Theme */
+    --bg-primary: #ffffff;
+    --text-primary: #333333;
+    --card-bg: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --gradient-1: linear-gradient(45deg, #6b48ff, #00ddeb);
+    --gradient-2: linear-gradient(135deg, #ff6b6b, #feca57);
+    --border-color: #e0e0e0;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --text-primary: #ffffff;
+    --card-bg: #2d2d2d;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --gradient-1: linear-gradient(45deg, #4a00e0, #8e2de2);
+    --gradient-2: linear-gradient(135deg, #e02d2d, #b91eff);
+    --border-color: #404040;
+}
+
+/* Colorful Theme */
+[data-theme="colorful"] {
+    --bg-primary: #f0f2f5;
+    --text-primary: #2c3e50;
+    --card-bg: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.15);
+    --gradient-1: linear-gradient(45deg, #00f2fe, #4facfe);
+    --gradient-2: linear-gradient(135deg, #fa709a, #fee140);
+    --border-color: #dcdde1;
+}
+
+/* Base Styles */
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', sans-serif;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Theme Switcher */
+.theme-switcher {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.theme-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    background: var(--card-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+}
+
+.theme-btn:hover {
+    transform: translateY(-2px);
+}
+
+.theme-btn.active {
+    background: var(--gradient-1);
+    color: white;
+    border-color: transparent;
+}
+
+/* Card Container */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Base Card Styles */
+.card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    padding: 20px;
+    text-align: center;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-footer {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Gradient Card */
+.gradient-card {
+    background: var(--gradient-1);
+    color: white;
+}
+
+/* Pattern Card */
+.pattern-card {
+    background-color: var(--card-bg);
+    background-image: 
+        radial-gradient(circle at 1px 1px, var(--border-color) 1px, transparent 0);
+    background-size: 20px 20px;
+}
+
+/* Shadow Card */
+.shadow-card {
+    box-shadow: 
+        0 5px 15px var(--shadow-color),
+        0 15px 35px var(--shadow-color),
+        0 50px 100px var(--shadow-color);
+}
+
+/* Border Card */
+.border-card {
+    position: relative;
+    background: var(--card-bg);
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+
+.border-card::before {
+    content: '';
+    position: absolute;
+    top: -2px; right: -2px;
+    bottom: -2px; left: -2px;
+    background: var(--gradient-2);
+    border-radius: 14px;
+    z-index: -1;
+}
+
+/* Button Styles */
+.card-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 6px;
+    background: var(--gradient-1);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.card-btn:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card-container {
+        grid-template-columns: 1fr;
+    }
+} 
