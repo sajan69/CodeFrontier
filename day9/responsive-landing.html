@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Responsive Design - Landing Page by Sajan Adhikari</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">Sajan Adhikari</div>
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <span class="hamburger"></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Responsive Web Design by Sajan Adhikari</h1>
+            <p class="hero-text">Create beautiful websites that work seamlessly across all devices</p>
+            <button class="cta-button">Get Started</button>
+        </div>
+        <picture class="hero-image">
+            <source srcset="https://via.placeholder.com/1200x800" media="(min-width: 1024px)">
+            <source srcset="https://via.placeholder.com/800x600" media="(min-width: 768px)">
+            <img src="https://via.placeholder.com/400x300" alt="Responsive Design Illustration">
+        </picture>
+    </header>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2>Key Features by Sajan Adhikari</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <img src="https://via.placeholder.com/100" alt="Mobile First">
+                <h3>Mobile First</h3>
+                <p>Design for mobile devices first, then enhance for larger screens.</p>
+            </div>
+            <div class="feature-card">
+                <img src="https://via.placeholder.com/100" alt="Fluid Typography">
+                <h3>Fluid Typography</h3>
+                <p>Text that scales smoothly across different screen sizes.</p>
+            </div>
+            <div class="feature-card">
+                <img src="https://via.placeholder.com/100" alt="Responsive Images">
+                <h3>Responsive Images</h3>
+                <p>Images that adapt to different screen sizes and resolutions.</p>
+            </div>
+            <div class="feature-card">
+                <img src="https://via.placeholder.com/100" alt="Flexible Layouts">
+                <h3>Flexible Layouts</h3>
+                <p>Layouts that adjust fluidly to any screen size.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing" id="pricing">
+        <h2>Pricing Plans by Sajan Adhikari</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Basic</h3>
+                <p class="price">$19<span>/month</span></p>
+                <ul class="features-list">
+                    <li>Responsive Layout</li>
+                    <li>Mobile Navigation</li>
+                    <li>Basic Support</li>
+                </ul>
+                <button class="pricing-button">Choose Plan</button>
+            </div>
+            <div class="pricing-card featured">
+                <h3>Pro</h3>
+                <p class="price">$49<span>/month</span></p>
+                <ul class="features-list">
+                    <li>Everything in Basic</li>
+                    <li>Custom Breakpoints</li>
+                    <li>Priority Support</li>
+                </ul>
+                <button class="pricing-button">Choose Plan</button>
+            </div>
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <p class="price">$99<span>/month</span></p>
+                <ul class="features-list">
+                    <li>Everything in Pro</li>
+                    <li>Custom Solutions</li>
+                    <li>24/7 Support</li>
+                </ul>
+                <button class="pricing-button">Choose Plan</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2>Contact Us by Sajan Adhikari</h2>
+        <div class="contact-container">
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; <span id="year"></span> ResponsiveDesign by Sajan Adhikari. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://twitter.com/sajanadhikari_" aria-label="Twitter">Twitter</a>
+                <a href="https://github.com/sajan69" aria-label="GitHub">GitHub</a>
+                <a href="https://www.linkedin.com/in/sajanadhikari/" aria-label="LinkedIn">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

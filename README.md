@@ -3,6 +3,8 @@
 
 🎉 Introducing: CodeFrontier – 31 Days of Modern Web Development! 
 
+![CodeFrontier Cover](cover.jpg)
+
 Are you ready to elevate your web development skills? Join me for a transformative journey as I launch CodeFrontier, a 31-day newsletter dedicated to exploring cutting-edge web development practices.
 
 ## 📅 What to Expect:
@@ -50,5 +52,7 @@ To get a local copy up and running, follow these steps.
 ## Contact
 
 Sajan Adhikari - [sajanac46@gmail.com]
+
+LinkedIn Newsletter: [CodeFrontier](https://www.linkedin.com/newsletters/codefrontier-7280227817785544704/)
 
 Project Link: [https://github.com/sajan69/CodeFrontier](https://github.com/sajan69/CodeFrontier)
