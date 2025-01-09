@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Animations Showcase</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation with View Transitions -->
+    <nav class="navbar">
+        <div class="nav-brand">Animation Showcase</div>
+        <div class="nav-links">
+            <a href="#transitions">Transitions</a>
+            <a href="#keyframes">Keyframes</a>
+            <a href="#transforms">Transforms</a>
+            <a href="#loading">Loading</a>
+        </div>
+    </nav>
+
+    <!-- Transition Examples -->
+    <section id="transitions" class="showcase-section">
+        <h2>Hover Transitions</h2>
+        <div class="card-container">
+            <div class="hover-card">
+                <h3>Scale Effect</h3>
+                <p>Hover to scale up smoothly</p>
+            </div>
+            <div class="hover-card color-shift">
+                <h3>Color Shift</h3>
+                <p>Hover to change colors</p>
+            </div>
+            <div class="hover-card shadow-grow">
+                <h3>Shadow Grow</h3>
+                <p>Hover to expand shadow</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Keyframe Animations -->
+    <section id="keyframes" class="showcase-section">
+        <h2>Keyframe Animations</h2>
+        <div class="animation-container">
+            <div class="pulse-animation">
+                <div class="circle"></div>
+                <p>Pulse Effect</p>
+            </div>
+            <div class="bounce-animation">
+                <div class="square"></div>
+                <p>Bounce Effect</p>
+            </div>
+            <div class="rotate-animation">
+                <div class="triangle"></div>
+                <p>Rotate Effect</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Transform Examples -->
+    <section id="transforms" class="showcase-section">
+        <h2>Transform Effects</h2>
+        <div class="transform-container">
+            <div class="transform-card" data-transform="rotate">
+                <div class="content">Rotate</div>
+            </div>
+            <div class="transform-card" data-transform="skew">
+                <div class="content">Skew</div>
+            </div>
+            <div class="transform-card" data-transform="perspective">
+                <div class="content">3D Flip</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loading Animations -->
+    <section id="loading" class="showcase-section">
+        <h2>Loading Animations</h2>
+        <div class="loading-container">
+            <div class="spinner">
+                <div class="spinner-inner"></div>
+            </div>
+            <div class="dots-loader">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- View Transition Demo -->
+    <section id="view-transitions" class="showcase-section">
+        <h2>View Transitions</h2>
+        <div class="theme-switcher">
+            <button class="theme-btn" data-theme="light">Light Mode</button>
+            <button class="theme-btn" data-theme="dark">Dark Mode</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2025 CodeFrontier. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 

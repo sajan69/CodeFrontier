@@ -21,9 +21,10 @@ The repository is organized as follows:
 - **Day 3**: Media Elements in HTML5 ([commit](https://github.com/sajan69/CodeFrontier/commit/64fe5333abbe341b1b774c010106881f192f0c87))
 - **Day 4**: Semantic HTML5 Elements ([commit](https://github.com/sajan69/CodeFrontier/commit/528ce8f87ea4dffdded6c606f9b7acf0ac345d3e))
 - **Day 5**: Advanced Features of HTML ([commit](https://github.com/sajan69/CodeFrontier/commit/f182305d78ace641d825f98dc2ff1917dc5f86d0))
-- **Day 6**: CSS Basics ([commit](https://github.com/sajan69/CodeFrontier/commit/48aa50fd9b2d10cd8c5695c2db99d5dc9aae6edc))
-- **Day 7**: CSS Flexbox ([commit](https://github.com/sajan69/CodeFrontier/commit/c26a37c8df7a5708ba8dfc937441fec9e1fef9a1))
+- **Day 6**: CSS Fundamentals ([commit](https://github.com/sajan69/CodeFrontier/commit/48aa50fd9b2d10cd8c5695c2db99d5dc9aae6edc))
+- **Day 7**: CSS Layout ([commit](https://github.com/sajan69/CodeFrontier/commit/c26a37c8df7a5708ba8dfc937441fec9e1fef9a1))
 - **Day 8**: CSS Styling ([commit](https://github.com/sajan69/CodeFrontier/commit/68c15b0f229cd40ee87b0c5d5e0d8d4f29794d43))
+- **Day 9**: CSS Responsive Design ([commit](https://github.com/sajan69/CodeFrontier/commit/c990fe96f55f1398f184f48b15ba240e3bfeb68f))
 
 
 ## Getting Started
