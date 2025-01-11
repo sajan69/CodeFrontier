@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager - JavaScript Fundamentals</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --background-color: #f5f6fa;
+            --text-color: #2d3436;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+        }
+
+        /* Form Styles */
+        .task-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        /* Task List Styles */
+        .task-list {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .task-controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .task-item {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            background: white;
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-title {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .task-priority {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+        }
+
+        .priority-high {
+            background: var(--danger-color);
+            color: white;
+        }
+
+        .priority-medium {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .priority-low {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .task-actions button {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+
+        .delete-btn {
+            background: var(--danger-color);
+        }
+
+        .complete-btn {
+            background: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Task Manager</h1>
+
+        <!-- Task Form -->
+        <div class="task-form">
+            <form id="taskForm">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="priority">Priority</label>
+                    <select id="priority">
+                        <option value="low">Low</option>
+                        <option value="medium">Medium</option>
+                        <option value="high">High</option>
+                    </select>
+                </div>
+                <button type="submit">Add Task</button>
+            </form>
+        </div>
+
+        <!-- Task List -->
+        <div class="task-list">
+            <div class="task-controls">
+                <select id="filterPriority">
+                    <option value="">All Priorities</option>
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <select id="filterStatus">
+                    <option value="">All Status</option>
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                </select>
+                <button id="sortDate">Sort by Date</button>
+            </div>
+            <div id="taskContainer"></div>
+        </div>
+    </div>
+
+    <script src="task-manager.js"></script>
+    <script>
+        // UI Integration
+        document.addEventListener('DOMContentLoaded', () => {
+            const taskForm = document.getElementById('taskForm');
+            const taskContainer = document.getElementById('taskContainer');
+            const filterPriority = document.getElementById('filterPriority');
+            const filterStatus = document.getElementById('filterStatus');
+            const sortDateBtn = document.getElementById('sortDate');
+            let sortAscending = true;
+
+            function renderTasks(tasksToRender = tasks) {
+                taskContainer.innerHTML = tasksToRender.map(task => `
+                    <div class="task-item" data-id="${task.id}">
+                        <div class="task-header">
+                            <span class="task-title">${task.title}</span>
+                            <span class="task-priority priority-${task.priority}">${task.priority}</span>
+                        </div>
+                        <p>${task.description}</p>
+                        <div class="task-actions">
+                            <button class="complete-btn" onclick="completeTask(${task.id})">${task.status === 'completed' ? 'Completed' : 'Complete'}</button>
+                            <button class="delete-btn" onclick="deleteTask(${task.id})">Delete</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            taskForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const title = document.getElementById('title').value;
+                const description = document.getElementById('description').value;
+                const priority = document.getElementById('priority').value;
+
+                taskManager.addTask(title, description, priority);
+                renderTasks();
+                taskForm.reset();
+            });
+
+            filterPriority.addEventListener('change', () => {
+                const priority = filterPriority.value;
+                const status = filterStatus.value;
+                let filteredTasks = tasks;
+
+                if (priority) {
+                    filteredTasks = taskManager.filterTasks({ priority });
+                }
+                if (status) {
+                    filteredTasks = filteredTasks.filter(task => task.status === status);
+                }
+
+                renderTasks(filteredTasks);
+            });
+
+            filterStatus.addEventListener('change', () => {
+                const priority = filterPriority.value;
+                const status = filterStatus.value;
+                let filteredTasks = tasks;
+
+                if (status) {
+                    filteredTasks = taskManager.filterTasks({ status });
+                }
+                if (priority) {
+                    filteredTasks = filteredTasks.filter(task => task.priority === priority);
+                }
+
+                renderTasks(filteredTasks);
+            });
+
+            sortDateBtn.addEventListener('click', () => {
+                const sortedTasks = taskManager.sortTasks('createdAt', sortAscending);
+                sortAscending = !sortAscending;
+                renderTasks(sortedTasks);
+            });
+
+            // Global functions for task actions
+            window.completeTask = (taskId) => {
+                const task = taskManager.getTaskById(taskId);
+                if (task) {
+                    task.complete();
+                    renderTasks();
+                }
+            };
+
+            window.deleteTask = (taskId) => {
+                taskManager.removeTask(taskId);
+                renderTasks();
+            };
+
+            // Initial render
+            renderTasks();
+        });
+    </script>
+</body>
+</html> 
