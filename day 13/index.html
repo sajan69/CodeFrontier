@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asynchronous JavaScript Demo</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --background-color: #f5f6fa;
+            --text-color: #2d3436;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 0.5rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            color: var(--danger-color);
+            margin: 0.5rem 0;
+        }
+
+        .success {
+            color: var(--secondary-color);
+            margin: 0.5rem 0;
+        }
+
+        .card {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin: 0.5rem 0;
+        }
+
+        #userList {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .parallel-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Asynchronous JavaScript Demo</h1>
+
+        <!-- Promises Demo -->
+        <section class="section" id="promisesDemo">
+            <h2>Promises</h2>
+            <button onclick="runPromiseDemo()">Run Promise Chain</button>
+            <div id="promiseOutput"></div>
+        </section>
+
+        <!-- Async/Await Demo -->
+        <section class="section" id="asyncAwaitDemo">
+            <h2>Async/Await</h2>
+            <button onclick="runAsyncDemo()">Run Async Operation</button>
+            <div id="asyncOutput"></div>
+        </section>
+
+        <!-- Fetch API Demo -->
+        <section class="section" id="fetchDemo">
+            <h2>Fetch API</h2>
+            <button onclick="fetchUsers()">Fetch Users</button>
+            <div id="userList"></div>
+        </section>
+
+        <!-- Error Handling Demo -->
+        <section class="section" id="errorDemo">
+            <h2>Error Handling</h2>
+            <button onclick="simulateError()">Simulate Error</button>
+            <button onclick="simulateRecovery()">Simulate Recovery</button>
+            <div id="errorOutput"></div>
+        </section>
+
+        <!-- Parallel Execution Demo -->
+        <section class="section" id="parallelDemo">
+            <h2>Parallel Execution</h2>
+            <button onclick="runParallelTasks()">Run Parallel Tasks</button>
+            <div class="parallel-results" id="parallelOutput"></div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
