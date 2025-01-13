@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6+ Features Demo</title>
+    <style>
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #2ecc71;
+            --danger-color: #e74c3c;
+            --background-color: #f5f6fa;
+            --text-color: #2d3436;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.6;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .demo-output {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            font-family: monospace;
+        }
+
+        button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+            margin: 0.5rem;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .card {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+        }
+
+        .success {
+            color: var(--secondary-color);
+        }
+
+        .error {
+            color: var(--danger-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ES6+ Features Demo</h1>
+
+        <!-- Arrow Functions Demo -->
+        <section class="section">
+            <h2>Arrow Functions</h2>
+            <button id="arrowBtn">Run Arrow Function Demo</button>
+            <div id="arrowOutput" class="demo-output"></div>
+        </section>
+
+        <!-- Destructuring Demo -->
+        <section class="section">
+            <h2>Destructuring</h2>
+            <button id="destructuringBtn">Run Destructuring Demo</button>
+            <div id="destructuringOutput" class="demo-output"></div>
+        </section>
+
+        <!-- Classes Demo -->
+        <section class="section">
+            <h2>Classes</h2>
+            <button id="classBtn">Run Class Demo</button>
+            <div id="classOutput" class="demo-output"></div>
+        </section>
+
+        <!-- Modern Syntax Demo -->
+        <section class="section">
+            <h2>Modern Syntax</h2>
+            <button id="syntaxBtn">Run Modern Syntax Demo</button>
+            <div id="syntaxOutput" class="demo-output"></div>
+        </section>
+
+        <!-- Module Demo -->
+        <section class="section">
+            <h2>Modules</h2>
+            <div id="moduleOutput" class="demo-output"></div>
+        </section>
+    </div>
+
+    <script type="module">
+        import { initializeDemos } from './script.js';
+        window.addEventListener('DOMContentLoaded', () => {
+            initializeDemos();
+        });
+    </script>
+</body>
+</html> 
