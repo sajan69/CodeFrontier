@@ -25,7 +25,11 @@ The repository is organized as follows:
 - **Day 7**: CSS Layout ([commit](https://github.com/sajan69/CodeFrontier/commit/c26a37c8df7a5708ba8dfc937441fec9e1fef9a1))
 - **Day 8**: CSS Styling ([commit](https://github.com/sajan69/CodeFrontier/commit/68c15b0f229cd40ee87b0c5d5e0d8d4f29794d43))
 - **Day 9**: CSS Responsive Design ([commit](https://github.com/sajan69/CodeFrontier/commit/c990fe96f55f1398f184f48b15ba240e3bfeb68f))
-
+- **Day 10**: CSS Animations ([commit](https://github.com/sajan69/CodeFrontier/commit/5788fe674ae1bd208d03f9de381dd2b38628f365))
+- **Day 11**: JavaScript Fundamentals ([commit](https://github.com/sajan69/CodeFrontier/commit/089c7a9a501b6bae03a45691ba720666b07f242f))
+- **Day 12**: DOM Manipulation ([commit](https://github.com/sajan69/CodeFrontier/commit/a606aff1fba0fec58c8634cb353d4904abbb5ff5))
+- **Day 13**: Asynchronous JavaScript ([commit](https://github.com/sajan69/CodeFrontier/commit/4495db81f2260d91ab92041b881065c2b05f73f6))
+- **Day 14**: ES6+ Features ([commit](https://github.com/sajan69/CodeFrontier/commit/36747edf5a2c997383977271c1c05ec5d3153694))
 
 ## Getting Started
 
