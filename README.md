@@ -30,6 +30,7 @@ The repository is organized as follows:
 - **Day 12**: DOM Manipulation ([commit](https://github.com/sajan69/CodeFrontier/commit/a606aff1fba0fec58c8634cb353d4904abbb5ff5))
 - **Day 13**: Asynchronous JavaScript ([commit](https://github.com/sajan69/CodeFrontier/commit/4495db81f2260d91ab92041b881065c2b05f73f6))
 - **Day 14**: ES6+ Features ([commit](https://github.com/sajan69/CodeFrontier/commit/36747edf5a2c997383977271c1c05ec5d3153694))
+- **Day 15**: Advanced JavaScript Concepts ([commit](https://github.com/sajan69/CodeFrontier/commit/b344f066728ec83269b5d3a510ab915a49006cb3))
 
 ## Getting Started
 
