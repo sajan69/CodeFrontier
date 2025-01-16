@@ -7,8 +7,7 @@ import Layout from './components/common/Layout';
 import ErrorFallback from './components/common/ErrorFallback';
 import LoadingSpinner from './components/common/LoadingSpinner';
 import ProjectsProvider from './context/ProjectsContext';
-import ProjectFeed from './components/projects/ProjectFeed';
-import AnalyticsDashboard from './components/analytics/AnalyticsDashboard';
+import ProjectContainer from './components/projects/ProjectContainer';
 
 function App() {
   return (
@@ -18,8 +17,7 @@ function App() {
         <ProjectsProvider>
           <Layout>
             <Suspense fallback={<LoadingSpinner />}>
-              <AnalyticsDashboard />
-              <ProjectFeed />
+              <ProjectContainer />
             </Suspense>
           </Layout>
         </ProjectsProvider>

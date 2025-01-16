@@ -32,9 +32,22 @@ export default function ProjectsProvider({ children }) {
     loadProjects();
   }, []);
 
+  const createProject = async (projectData) => {
+    dispatch({ type: ACTIONS.SET_LOADING, payload: true });
+    try {
+      const newProject = await projectsService.createProject(projectData);
+      dispatch({ type: ACTIONS.ADD_PROJECT, payload: newProject });
+      return newProject;
+    } catch (error) {
+      dispatch({ type: ACTIONS.SET_ERROR, payload: error.message });
+      throw error;
+    }
+  };
+
   const value = useMemo(() => ({
     ...state,
     dispatch,
+    createProject,
   }), [state]);
 
   return (

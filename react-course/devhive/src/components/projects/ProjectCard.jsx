@@ -1,11 +1,24 @@
 import { Card, CardContent, CardActions, Typography, Button, Chip, Box } from '@mui/material';
 import PropTypes from 'prop-types';
 
-export default function ProjectCard({ project }) {
+export default function ProjectCard({ project, onClick }) {
   const { title, description, status, tags, collaborators } = project;
 
   return (
-    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <Card 
+      sx={{ 
+        height: '100%', 
+        display: 'flex', 
+        flexDirection: 'column',
+        cursor: 'pointer',
+        '&:hover': {
+          transform: 'translateY(-4px)',
+          boxShadow: 4,
+        },
+        transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+      }}
+      onClick={onClick}
+    >
       <CardContent sx={{ flexGrow: 1 }}>
         <Typography gutterBottom variant="h5" component="h2">
           {title}
@@ -59,4 +72,5 @@ ProjectCard.propTypes = {
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     collaborators: PropTypes.arrayOf(PropTypes.object),
   }).isRequired,
+  onClick: PropTypes.func.isRequired,
 }; 

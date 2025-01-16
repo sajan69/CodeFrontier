@@ -44,4 +44,15 @@ export const projectsService = {
     await new Promise(resolve => setTimeout(resolve, 500));
     return MOCK_PROJECTS.find(project => project.id === id);
   },
+
+  async createProject(projectData) {
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    const newProject = {
+      id: Date.now().toString(),
+      ...projectData,
+      createdAt: new Date().toISOString(),
+    };
+    MOCK_PROJECTS.push(newProject);
+    return newProject;
+  }
 }; 
