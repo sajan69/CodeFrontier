@@ -1,0 +1,45 @@
+:root {
+  --primary-color: #646cff;
+  --secondary-color: #bd34fe;
+  --background-color: #242424;
+  --text-color: #ffffff;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.app {
+  min-height: 100vh;
+}
+
+/* Smooth transitions */
+.MuiPaper-root {
+  transition: all 0.3s ease;
+}
+
+.MuiPaper-root:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-color);
+} 
