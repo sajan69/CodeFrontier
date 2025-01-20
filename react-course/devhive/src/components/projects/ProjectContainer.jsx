@@ -2,12 +2,11 @@ import { useState } from 'react';
 import { Box, Grid, Typography, Tab, Tabs, Alert, Snackbar } from '@mui/material';
 import withAuth from '../patterns/withAuth';
 import withLogging from '../patterns/withLogging';
-import Select from '../compound/Select';
-import Form from '../compound/Form';
+import ProjectFeed from './ProjectFeed';
 import ProjectDetails from '../server/ProjectDetails';
 import AnalyticsDashboard from '../analytics/AnalyticsDashboard';
-import ProjectFeed from './ProjectFeed';
 import PatternsShowcase from '../patterns/PatternsShowcase';
+import ProjectForm from '../forms/ProjectForm';
 import { useProjects } from '../../context/ProjectsContext';
 
 function ProjectContainer() {
@@ -16,12 +15,18 @@ function ProjectContainer() {
   const [error, setError] = useState(null);
   const { createProject } = useProjects();
 
-  const handleProjectSubmit = async (values) => {
+  const handleProjectSubmit = async (formData) => {
     try {
+      console.log('formData', formData);
       const newProject = await createProject({
-        ...values,
+        ...formData,
         status: 'active',
-        tags: values.tags.split(',').map(tag => tag.trim()),
+        tags: formData.tags 
+          ? String(formData.tags)
+              .split(',')
+              .map(tag => tag.trim())
+              .filter(tag => tag !== '')
+          : [],
         collaborators: []
       });
       setView('feed');
@@ -36,38 +41,26 @@ function ProjectContainer() {
       {/* Navigation */}
       <Box sx={{ mb: 4 }}>
         <Tabs value={view} onChange={(_, newValue) => setView(newValue)}>
-          <Tab label="Project Feed" value="feed" />
-          <Tab label="Create Project" value="create" />
+          <Tab label="Projects" value="feed" />
+          <Tab label="New Project" value="new" />
           <Tab label="Analytics" value="analytics" />
-          <Tab label="Patterns Demo" value="patterns" />
+          <Tab label="Patterns" value="patterns" />
         </Tabs>
       </Box>
 
       {/* Main Content */}
       <Grid container spacing={3}>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={selectedProject ? 8 : 12}>
           {view === 'feed' && (
             <ProjectFeed onProjectSelect={setSelectedProject} />
           )}
 
-          {view === 'create' && (
+          {view === 'new' && (
             <Box>
-              <Typography variant="h5" gutterBottom>Create New Project</Typography>
-              <Form onSubmit={handleProjectSubmit}>
-                <Form.Field name="title">
-                  <Form.Label>Project Title</Form.Label>
-                  <Form.Input name="title" />
-                </Form.Field>
-                <Form.Field name="description">
-                  <Form.Label>Description</Form.Label>
-                  <Form.Input name="description" multiline rows={4} />
-                </Form.Field>
-                <Form.Field name="tags">
-                  <Form.Label>Tags</Form.Label>
-                  <Form.Input name="tags" placeholder="React, TypeScript, etc." />
-                </Form.Field>
-                <Form.Submit>Create Project</Form.Submit>
-              </Form>
+              <Typography variant="h5" gutterBottom>
+                Create New Project
+              </Typography>
+              <ProjectForm onSubmit={handleProjectSubmit} />
             </Box>
           )}
 
@@ -76,14 +69,12 @@ function ProjectContainer() {
           {view === 'patterns' && <PatternsShowcase />}
         </Grid>
 
-        <Grid item xs={12} md={4}>
-          {selectedProject && (
-            <>
-              <Typography variant="h6" gutterBottom>Project Details</Typography>
-              <ProjectDetails id={selectedProject} />
-            </>
-          )}
-        </Grid>
+        {selectedProject && (
+          <Grid item xs={12} md={4}>
+            <Typography variant="h6" gutterBottom>Project Details</Typography>
+            <ProjectDetails id={selectedProject} />
+          </Grid>
+        )}
       </Grid>
 
       <Snackbar 

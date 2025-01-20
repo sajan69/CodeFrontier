@@ -6,7 +6,7 @@ import theme from './styles/theme';
 import Layout from './components/common/Layout';
 import ErrorFallback from './components/common/ErrorFallback';
 import LoadingSpinner from './components/common/LoadingSpinner';
-import ProjectsProvider from './context/ProjectsContext';
+import {ProjectsProvider} from './context/ProjectsContext';
 import { ThemeProvider as AppThemeProvider } from './state/contexts/ThemeContext';
 import { NotificationProvider } from './state/contexts/NotificationContext';
 import { UserPreferencesProvider } from './state/contexts/UserPreferencesContext';

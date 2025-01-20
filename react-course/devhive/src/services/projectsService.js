@@ -1,3 +1,6 @@
+import { validate } from './validators';
+import { projectSchema } from './validators';
+
 const MOCK_PROJECTS = [
   {
     id: '1',
@@ -46,13 +49,57 @@ export const projectsService = {
   },
 
   async createProject(projectData) {
+    // Validate project data
+    const errors = {};
+    Object.keys(projectSchema).forEach(field => {
+      const error = validate(field, projectData[field], projectSchema);
+      if (error) errors[field] = error;
+    });
+
+    if (Object.keys(errors).length > 0) {
+      throw new Error('Invalid project data: ' + Object.values(errors).join(', '));
+    }
+
+    // Simulate API delay
     await new Promise(resolve => setTimeout(resolve, 1000));
+
     const newProject = {
       id: Date.now().toString(),
       ...projectData,
       createdAt: new Date().toISOString(),
     };
+
     MOCK_PROJECTS.push(newProject);
     return newProject;
-  }
+  },
+
+  async updateProject(id, updates) {
+    const projectIndex = MOCK_PROJECTS.findIndex(p => p.id === id);
+    if (projectIndex === -1) {
+      throw new Error('Project not found');
+    }
+
+    // Validate updates
+    const errors = {};
+    Object.keys(updates).forEach(field => {
+      if (projectSchema[field]) {
+        const error = validate(field, updates[field], projectSchema);
+        if (error) errors[field] = error;
+      }
+    });
+
+    if (Object.keys(errors).length > 0) {
+      throw new Error('Invalid project data: ' + Object.values(errors).join(', '));
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 1000));
+
+    MOCK_PROJECTS[projectIndex] = {
+      ...MOCK_PROJECTS[projectIndex],
+      ...updates,
+      updatedAt: new Date().toISOString(),
+    };
+
+    return MOCK_PROJECTS[projectIndex];
+  },
 }; 

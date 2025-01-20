@@ -2,6 +2,7 @@ import { createContext, useContext, useReducer, useMemo, useEffect } from 'react
 import PropTypes from 'prop-types';
 import projectsReducer, { ACTIONS } from '../reducers/projectsReducer';
 import { projectsService } from '../services/projectsService';
+import { useNotifications } from '../state/contexts/NotificationContext';
 
 const ProjectsContext = createContext();
 
@@ -16,8 +17,10 @@ const initialState = {
   error: null,
 };
 
-export default function ProjectsProvider({ children }) {
+export function ProjectsProvider({ children }) {
   const [state, dispatch] = useReducer(projectsReducer, initialState);
+
+  const { addNotification } = useNotifications();
 
   useEffect(() => {
     async function loadProjects() {
@@ -37,9 +40,21 @@ export default function ProjectsProvider({ children }) {
     try {
       const newProject = await projectsService.createProject(projectData);
       dispatch({ type: ACTIONS.ADD_PROJECT, payload: newProject });
+      
+      addNotification({
+        message: `Project "${newProject.title}" created successfully!`,
+        type: 'success',
+      });
+      
       return newProject;
     } catch (error) {
       dispatch({ type: ACTIONS.SET_ERROR, payload: error.message });
+      
+      addNotification({
+        message: `Failed to create project: ${error.message}`,
+        type: 'error',
+      });
+      
       throw error;
     }
   };
