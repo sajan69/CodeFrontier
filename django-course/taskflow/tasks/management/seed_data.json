@@ -1,0 +1,162 @@
+{
+    "users": [
+        {
+            "username": "sajan_adhikari",
+            "email": "sajan.adhikari@example.com",
+            "first_name": "Sajan",
+            "last_name": "Adhikari",
+            "password": "nepali2024tech"
+        },
+        {
+            "username": "anika_shrestha",
+            "email": "anika.shrestha@example.com",
+            "first_name": "Anika",
+            "last_name": "Shrestha",
+            "password": "kathmandudev123"
+        },
+        {
+            "username": "rohan_tamang",
+            "email": "rohan.tamang@example.com",
+            "first_name": "Rohan",
+            "last_name": "Tamang",
+            "password": "design_nepal2024"
+        },
+        {
+            "username": "priya_poudel",
+            "email": "priya.poudel@example.com",
+            "first_name": "Priya",
+            "last_name": "Poudel",
+            "password": "productmanager2024"
+        },
+        {
+            "username": "bikash_gurung",
+            "email": "bikash.gurung@example.com",
+            "first_name": "Bikash",
+            "last_name": "Gurung",
+            "password": "backend_expert123"
+        }
+    ],
+    "projects": [
+        {
+            "name": "Nepal Education Platform",
+            "description": "Online learning platform for Nepali students and educators",
+            "owner": "sajan_adhikari",
+            "members": ["anika_shrestha", "rohan_tamang", "bikash_gurung"]
+        },
+        {
+            "name": "Agricultural Tech Solution",
+            "description": "Mobile app for connecting farmers with market insights",
+            "owner": "priya_poudel",
+            "members": ["sajan_adhikari", "bikash_gurung"]
+        },
+        {
+            "name": "Tourism Recommendation App",
+            "description": "AI-powered travel recommendation system for Nepal",
+            "owner": "rohan_tamang",
+            "members": ["anika_shrestha", "priya_poudel"]
+        }
+    ],
+    "categories": [
+        {
+            "name": "UI/UX Design",
+            "description": "User interface and experience design tasks",
+            "project": "Nepal Education Platform",
+            "color": "#4CAF50"
+        },
+        {
+            "name": "Backend Development",
+            "description": "Server-side logic and database management",
+            "project": "Nepal Education Platform",
+            "color": "#2196F3"
+        },
+        {
+            "name": "Frontend Development",
+            "description": "Client-side application development",
+            "project": "Nepal Education Platform",
+            "color": "#FF9800"
+        },
+        {
+            "name": "Market Research",
+            "description": "Agricultural market insights and data collection",
+            "project": "Agricultural Tech Solution",
+            "color": "#9C27B0"
+        },
+        {
+            "name": "App Development",
+            "description": "Mobile application development",
+            "project": "Agricultural Tech Solution", 
+            "color": "#795548"
+        },
+        {
+            "name": "AI Integration",
+            "description": "Machine learning and recommendation algorithms",
+            "project": "Tourism Recommendation App",
+            "color": "#607D8B"
+        }
+    ],
+    "tasks": [
+        {
+            "title": "User Registration Flow Design",
+            "description": "Create intuitive user registration process for education platform",
+            "project": "Nepal Education Platform",
+            "category": "UI/UX Design",
+            "assignee": "rohan_tamang",
+            "status": "in_progress",
+            "priority": 3,
+            "due_date": "2024-03-20T00:00:00Z"
+        },
+        {
+            "title": "Database Schema Design",
+            "description": "Design scalable database schema for learning platform",
+            "project": "Nepal Education Platform",
+            "category": "Backend Development",
+            "assignee": "bikash_gurung",
+            "status": "todo",
+            "priority": 4,
+            "due_date": "2024-03-15T00:00:00Z",
+            "dependencies": ["User Registration Flow Design"]
+        },
+        {
+            "title": "Responsive Dashboard",
+            "description": "Create responsive frontend dashboard for educators",
+            "project": "Nepal Education Platform",
+            "category": "Frontend Development",
+            "assignee": "anika_shrestha",
+            "status": "todo",
+            "priority": 3,
+            "due_date": "2024-04-01T00:00:00Z",
+            "dependencies": ["Database Schema Design"]
+        },
+        {
+            "title": "Agricultural Market Data Collection",
+            "description": "Research and compile agricultural market trends in Nepal",
+            "project": "Agricultural Tech Solution",
+            "category": "Market Research",
+            "assignee": "priya_poudel",
+            "status": "in_progress",
+            "priority": 2,
+            "due_date": "2024-03-25T00:00:00Z"
+        },
+        {
+            "title": "Mobile App Prototype",
+            "description": "Develop initial prototype for farmer's market app",
+            "project": "Agricultural Tech Solution",
+            "category": "App Development",
+            "assignee": "sajan_adhikari",
+            "status": "todo",
+            "priority": 3,
+            "due_date": "2024-04-10T00:00:00Z",
+            "dependencies": ["Agricultural Market Data Collection"]
+        },
+        {
+            "title": "Tourism Recommendation Algorithm",
+            "description": "Design AI-powered recommendation system for Nepali tourist destinations",
+            "project": "Tourism Recommendation App",
+            "category": "AI Integration",
+            "assignee": "anika_shrestha",
+            "status": "todo",
+            "priority": 4,
+            "due_date": "2024-04-15T00:00:00Z"
+        }
+    ]
+}

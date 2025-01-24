@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}My Projects - TaskFlow{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>My Projects</h2>
+            <a href="{% url 'tasks:project-create' %}" class="btn btn-primary">
+                <i class="bi bi-plus-lg"></i> Create New Project
+            </a>
+        </div>
+    </div>
+
+    <div class="col-md-12 mb-4">
+        <form method="get" class="row g-3">
+            <div class="col-md-8">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" 
+                           placeholder="Search projects..." value="{{ request.GET.q }}">
+                    <button class="btn btn-outline-secondary" type="submit">
+                        <i class="bi bi-search"></i> Search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    {% csrf_token %}
+    {% for project in projects %}
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <h5 class="card-title">{{ project.name }}</h5>
+                <p class="card-text text-muted">
+                    <small>
+                        <i class="bi bi-person"></i> Owner: {{ project.owner.username }}
+                    </small>
+                </p>
+                <p class="card-text">{{ project.description|truncatewords:30 }}</p>
+            </div>
+            <div class="card-footer bg-transparent">
+                <div class="btn-group w-100">
+                    <a href="{% url 'tasks:project-detail' project.slug %}" 
+                       class="btn btn-outline-primary">
+                        <i class="bi bi-eye"></i> View
+                    </a>
+                    <a href="{% url 'tasks:project-update' project.slug %}" 
+                       class="btn btn-outline-secondary">
+                        <i class="bi bi-pencil"></i> Edit
+                    </a>
+                    <a href="#" onclick="return confirmDelete(
+                        '{% url 'tasks:project-delete' project.slug %}',
+                        'Project',
+                        '{{ project.name|escapejs }}'
+                    )" class="btn btn-outline-danger">
+                        <i class="bi bi-trash"></i> Delete
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No projects found. 
+            <a href="{% url 'tasks:project-create' %}" class="alert-link">Create your first project!</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %} 

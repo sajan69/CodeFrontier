@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ project.name }} - TaskFlow{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12 mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>{{ project.name }}</h2>
+            <div class="btn-group">
+                <a href="{% url 'tasks:project-update' project.slug %}" 
+                   class="btn btn-outline-primary">
+                    <i class="bi bi-pencil"></i> Edit Project
+                </a>
+                <a href="{% url 'tasks:task-create' project.slug %}" 
+                   class="btn btn-primary">
+                    <i class="bi bi-plus-lg"></i> Add Task
+                </a>
+            </div>
+        </div>
+        <p class="text-muted mt-2">{{ project.description }}</p>
+    </div>
+
+    <div class="col-md-12 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Tasks</h5>
+            </div>
+            <div class="card-body">
+                <form method="get" class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <select name="status" class="form-select">
+                            <option value="">All Statuses</option>
+                            {% for value, label in status_choices %}
+                            <option value="{{ value }}" 
+                                    {% if request.GET.status == value %}selected{% endif %}>
+                                {{ label }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <select name="priority" class="form-select">
+                            <option value="">All Priorities</option>
+                            {% for value, label in priority_choices %}
+                            <option value="{{ value }}"
+                                    {% if request.GET.priority == value %}selected{% endif %}>
+                                {{ label }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-secondary">
+                            <i class="bi bi-funnel"></i> Filter
+                        </button>
+                    </div>
+                </form>
+
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Status</th>
+                                <th>Priority</th>
+                                <th>Assignee</th>
+                                <th>Due Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% csrf_token %}
+                            {% for task in tasks %}
+                            <tr>
+                                <td>
+                                    <a href="{% url 'tasks:task-detail' project.slug task.id %}"
+                                       class="text-decoration-none">
+                                        {{ task.title }}
+                                    </a>
+                                </td>
+                                <td>
+                                    <span class="badge {% if task.status == 'done' %}bg-success
+                                                      {% elif task.status == 'in_progress' %}bg-primary
+                                                      {% elif task.status == 'review' %}bg-warning
+                                                      {% else %}bg-secondary{% endif %}">
+                                        {{ task.get_status_display }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge {% if task.priority >= 4 %}bg-danger
+                                                      {% elif task.priority == 3 %}bg-warning
+                                                      {% elif task.priority == 2 %}bg-info
+                                                      {% else %}bg-secondary{% endif %}">
+                                        {{ task.get_priority_display }}
+                                    </span>
+                                </td>
+                                <td>
+                                    {% if task.assignee %}
+                                        <i class="bi bi-person"></i> {{ task.assignee.username }}
+                                    {% else %}
+                                        <span class="text-muted">Unassigned</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if task.due_date %}
+                                        <span class="{% if task.is_overdue %}text-danger{% endif %}">
+                                            {{ task.due_date|date:"M d, Y" }}
+                                        </span>
+                                    {% else %}
+                                        <span class="text-muted">No due date</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        <a href="{% url 'tasks:task-detail' project.slug task.id %}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-pencil"></i>
+                                        </a>
+                                        <a href="#" onclick="return confirmDelete(
+                                            '{% url 'tasks:task-delete' project.slug task.id %}',
+                                            'Task',
+                                            '{{ task.title|escapejs }}'
+                                        )" class="btn btn-sm btn-outline-danger">
+                                            <i class="bi bi-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="6" class="text-center">
+                                    <p class="my-3">No tasks found. 
+                                        <a href="{% url 'tasks:task-create' project.slug %}">
+                                            Create your first task!
+                                        </a>
+                                    </p>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
