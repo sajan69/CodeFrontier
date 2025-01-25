@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     
                     {% for field in form %}
@@ -55,6 +55,16 @@
                             {% for error in field.errors %}
                                 <div class="invalid-feedback d-block">{{ error }}</div>
                             {% endfor %}
+                        {% endif %}
+                        {% if field.name == 'attachment' and task.attachment %}
+                            <div class="mt-2">
+                                <p class="mb-1">Current file: 
+                                    <a href="{{ task.attachment.url }}" target="_blank">
+                                        <i class="bi bi-file-earmark"></i>
+                                        {{ task.attachment.name|slice:"19:" }}
+                                    </a>
+                                </p>
+                            </div>
                         {% endif %}
                     </div>
                     {% endfor %}

@@ -6,8 +6,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 from django.db import models
 from django.http import JsonResponse
-from .models import Project, Task, Category
-from .forms import ProjectForm, TaskForm
+from .models import Project, Task, Category, Comment
+from .forms import ProjectForm, TaskForm, CategoryForm, CommentForm
 from django.contrib.auth import logout
 
 class ProjectListView(LoginRequiredMixin, ListView):
@@ -108,7 +108,7 @@ def task_create(request, project_slug):
     project = get_object_or_404(Project, slug=project_slug)
     print(project)
     if request.method == 'POST':
-        form = TaskForm(request.POST, project=project)
+        form = TaskForm(request.POST, request.FILES, project=project)
         if form.is_valid():
             task = form.save(commit=False)
             task.project = project
@@ -150,3 +150,95 @@ def task_delete(request, project_slug, task_id):
 def logout_view(request):
     logout(request)
     return redirect('tasks:project-list')
+
+@login_required
+def category_list(request, project_slug):
+    project = get_object_or_404(Project, slug=project_slug)
+    if request.method == 'POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            category = form.save(commit=False)
+            category.project = project
+            category.save()
+            messages.success(request, 'Category created successfully.')
+            return redirect('tasks:category-list', project_slug=project.slug)
+    else:
+        form = CategoryForm()
+    
+    categories = Category.objects.filter(project=project)
+    return render(request, 'tasks/category_list.html', {
+        'project': project,
+        'categories': categories,
+        'form': form
+    })
+
+@login_required
+def category_edit(request, project_slug, category_id):
+    project = get_object_or_404(Project, slug=project_slug)
+    category = get_object_or_404(Category, id=category_id, project=project)
+    
+    if request.method == 'POST':
+        form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Category updated successfully.')
+            return redirect('tasks:category-list', project_slug=project.slug)
+    else:
+        form = CategoryForm(instance=category)
+    
+    return render(request, 'tasks/category_edit.html', {
+        'project': project,
+        'category': category,
+        'form': form
+    })
+
+@login_required
+def category_delete(request, project_slug, category_id):
+    project = get_object_or_404(Project, slug=project_slug)
+    category = get_object_or_404(Category, id=category_id, project=project)
+    
+    if request.method == 'POST':
+        category.delete()
+        messages.success(request, 'Category deleted successfully.')
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'error'}, status=400)
+
+@login_required
+def task_comments(request, project_slug, task_id):
+    project = get_object_or_404(Project, slug=project_slug)
+    task = get_object_or_404(Task, id=task_id, project=project)
+    
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.task = task
+            comment.author = request.user
+            comment.save()
+            messages.success(request, 'Comment added successfully.')
+            return redirect('tasks:task-comments', project_slug=project.slug, task_id=task.id)
+    else:
+        form = CommentForm()
+    
+    comments = Comment.objects.filter(task=task).order_by('-created_at')
+    return render(request, 'tasks/task_comments.html', {
+        'task': task,
+        'comments': comments,
+        'form': form
+    })
+
+@login_required
+def comment_delete(request, project_slug, task_id, comment_id):
+    project = get_object_or_404(Project, slug=project_slug)
+    task = get_object_or_404(Task, id=task_id, project=project)
+    comment = get_object_or_404(Comment, id=comment_id, task=task)
+    
+    if request.user != comment.author and request.user != project.owner:
+        messages.error(request, 'You do not have permission to delete this comment.')
+        return redirect('tasks:task-comments', project_slug=project.slug, task_id=task.id)
+    
+    if request.method == 'POST':
+        comment.delete()
+        messages.success(request, 'Comment deleted successfully.')
+        return redirect('tasks:task-comments', project_slug=project.slug, task_id=task.id)
+    return redirect('tasks:task-comments', project_slug=project.slug, task_id=task.id)

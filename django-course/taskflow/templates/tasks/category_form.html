@@ -1,27 +1,33 @@
 {% extends 'base.html' %}
 
-{% block title %}
-    {% if form.instance.pk %}Edit{% else %}Create{% endif %} Task - {{ project.name }} - TaskFlow
-{% endblock %}
+{% block title %}Edit Category - {{ project.name }} - TaskFlow{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
     <div class="col-md-8">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="{% url 'tasks:project-list' %}">Projects</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'tasks:project-detail' project.slug %}">
+                        {{ project.name }}
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="{% url 'tasks:category-list' project.slug %}">Categories</a>
+                </li>
+                <li class="breadcrumb-item active">Edit {{ category.name }}</li>
+            </ol>
+        </nav>
+
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title mb-0">
-                    {% if form.instance.pk %}
-                        Edit Task: {{ form.instance.title }}
-                    {% else %}
-                        Create New Task
-                    {% endif %}
-                    <small class="text-muted">
-                        in {{ project.name }}
-                    </small>
-                </h4>
+                <h4 class="card-title mb-0">Edit Category</h4>
             </div>
             <div class="card-body">
-                <form method="post" enctype="multipart/form-data">
+                <form method="post">
                     {% csrf_token %}
                     
                     {% for field in form %}
@@ -41,27 +47,14 @@
                                 <div class="invalid-feedback d-block">{{ error }}</div>
                             {% endfor %}
                         {% endif %}
-                        {% if field.name == 'attachment' and form.instance.attachment %}
-                            <div class="mt-2">
-                                <p class="mb-1">Current file: 
-                                    <a href="{{ form.instance.attachment.url }}" target="_blank">
-                                        {{ form.instance.attachment.name|slice:"19:" }}
-                                    </a>
-                                </p>
-                            </div>
-                        {% endif %}
                     </div>
                     {% endfor %}
                     
                     <div class="d-grid gap-2">
                         <button type="submit" class="btn btn-primary">
-                            {% if form.instance.pk %}
-                                <i class="bi bi-save"></i> Save Changes
-                            {% else %}
-                                <i class="bi bi-plus-lg"></i> Create Task
-                            {% endif %}
+                            <i class="bi bi-save"></i> Save Changes
                         </button>
-                        <a href="{% url 'tasks:project-detail' project.slug %}" 
+                        <a href="{% url 'tasks:category-list' project.slug %}" 
                            class="btn btn-outline-secondary">
                             <i class="bi bi-x-lg"></i> Cancel
                         </a>

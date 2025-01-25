@@ -12,6 +12,10 @@
                    class="btn btn-outline-primary">
                     <i class="bi bi-pencil"></i> Edit Project
                 </a>
+                <a href="{% url 'tasks:category-list' project.slug %}" 
+                   class="btn btn-outline-secondary">
+                    <i class="bi bi-list-columns"></i> Categories
+                </a>
                 <a href="{% url 'tasks:task-create' project.slug %}" 
                    class="btn btn-primary">
                     <i class="bi bi-plus-lg"></i> Add Task
@@ -66,6 +70,10 @@
                                 <th>Priority</th>
                                 <th>Assignee</th>
                                 <th>Due Date</th>
+                                <th>Category</th>
+                                <th>Dependencies</th>
+                                <th>Attachment</th>
+                                <th>Comments</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -112,6 +120,42 @@
                                     {% endif %}
                                 </td>
                                 <td>
+                                    {% if task.category %}
+                                    <span style="background-color: {{ task.category.color }}; color: white; padding: 5px; border-radius: 5px;"> 
+                                       
+                                        {{ task.category.name }}
+                                    </span>
+                                    {% else %}
+                                        <span class="text-muted">No category</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if task.dependencies.all %}
+                                        {% for dependency in task.dependencies.all %}
+                                            {{ dependency.title }}
+                                        {% endfor %}
+                                    {% else %}
+                                        <span class="text-muted">No dependencies</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if task.attachment %}
+                                        <a href="{{ task.attachment.url }}" target="_blank" 
+                                           class="text-decoration-none">
+                                            <i class="bi bi-file-earmark"></i>
+                                            {{ task.attachment.name|slice:"19:" }}
+                                        </a>
+                                    {% else %}
+                                        <span class="text-muted">No file</span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a href="{% url 'tasks:task-comments' project.slug task.id %}"
+                                       class="btn btn-outline-secondary">
+                                        <i class="bi bi-chat"></i> {{ task.comments.count }}
+                                    </a>
+                                </td>
+                                <td>
                                     <div class="btn-group">
                                         <a href="{% url 'tasks:task-detail' project.slug task.id %}"
                                            class="btn btn-sm btn-outline-primary">
@@ -129,7 +173,7 @@
                             </tr>
                             {% empty %}
                             <tr>
-                                <td colspan="6" class="text-center">
+                                <td colspan="7" class="text-center">
                                     <p class="my-3">No tasks found. 
                                         <a href="{% url 'tasks:task-create' project.slug %}">
                                             Create your first task!

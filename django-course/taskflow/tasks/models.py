@@ -105,6 +105,13 @@ class Task(TimeStampedModel):
     priority = models.IntegerField(choices=PRIORITY_CHOICES, default=2)
     due_date = models.DateTimeField(null=True, blank=True)
     dependencies = models.ManyToManyField('self', symmetrical=False, related_name='dependent_tasks', blank=True)
+    attachment = models.FileField(
+        upload_to='task_attachments/%Y/%m/',
+        null=True,
+        blank=True,
+        help_text='Upload a file related to this task (max 5MB)',
+        max_length=255
+    )
 
     objects = TaskManager()
 
@@ -117,6 +124,9 @@ class Task(TimeStampedModel):
         
         if self.status == 'done' and not self.assignee:
             raise ValidationError({'assignee': 'Completed tasks must have an assignee'})
+
+        if self.attachment and self.attachment.size > 5 * 1024 * 1024:  # 5MB limit
+            raise ValidationError({'attachment': 'File size cannot exceed 5MB'})
 
     @property
     def is_overdue(self):
