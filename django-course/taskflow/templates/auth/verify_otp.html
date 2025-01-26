@@ -1,0 +1,24 @@
+{% extends "auth/base_auth.html" %}
+
+{% block auth_content %}
+<h2 class="text-center mb-4">Verify OTP</h2>
+<form method="post" novalidate>
+    {% csrf_token %}
+    
+    <div class="mb-3">
+        <label for="otp" class="form-label">Enter OTP</label>
+        <input type="text" class="form-control" id="otp" name="otp" required>
+        <div class="form-text">Please enter the OTP sent to your email.</div>
+    </div>
+    
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary">Verify OTP</button>
+    </div>
+</form>
+
+<div class="text-center mt-3">
+    <p>
+        Didn't receive the OTP? <a href="{% url 'tasks:resend_otp' %}">Resend OTP</a>
+    </p>
+</div>
+{% endblock %} 

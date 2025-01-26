@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 from django.utils.text import slugify
 from django.core.exceptions import ValidationError
+import random
 
 class TimeStampedModel(models.Model):
     """
@@ -150,3 +151,38 @@ class Comment(TimeStampedModel):
 
     def __str__(self):
         return f"Comment by {self.author.username} on {self.task.title}"
+
+class OTPVerification(models.Model):
+    """
+    Model for handling OTP verification for user authentication.
+    """
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    otp = models.CharField(max_length=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+    expires_at = models.DateTimeField()
+    is_verified = models.BooleanField(default=False)
+
+    def generate_otp(self):
+        self.otp = ''.join([str(random.randint(0, 9)) for _ in range(6)])
+        self.expires_at = timezone.now() + timezone.timedelta(minutes=10)
+        self.save()
+        return self.otp
+
+    def is_valid(self):
+        return not self.is_verified and timezone.now() <= self.expires_at
+
+    def __str__(self):
+        return f"OTP for {self.user.username}"
+
+class UserProfile(models.Model):
+    """
+    Extended user profile model.
+    """
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    phone = models.CharField(max_length=15, blank=True)
+    bio = models.TextField(blank=True)
+    avatar = models.ImageField(upload_to='avatars/%Y/%m/', blank=True)
+
+    def __str__(self):
+        return f"Profile of {self.user.username}"
+

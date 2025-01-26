@@ -21,3 +21,8 @@ def mul(value, arg):
         return int(value) * int(arg)
     except (ValueError, TypeError):
         return str(value) * int(arg)
+
+@register.filter
+def add_class(value, arg):
+    return value.as_widget(attrs={'class': arg})
+    

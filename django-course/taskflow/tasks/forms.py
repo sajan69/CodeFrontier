@@ -1,6 +1,10 @@
 from django import forms
 from .models import Project, Task, Category, Comment
 from django.utils import timezone
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
+from .models import UserProfile
 
 class ProjectForm(forms.ModelForm):
     class Meta:
@@ -117,3 +121,114 @@ class TaskForm(forms.ModelForm):
             })
         
         return cleaned_data 
+
+class UserRegistrationForm(UserCreationForm):
+    """
+    Form for user registration with email field.
+    """
+    email = forms.EmailField(required=True)
+    
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control'})
+        
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError('This email is already registered.')
+        return email
+
+class LoginForm(forms.Form):
+    """
+    Form for user login.
+    """
+    username = forms.CharField()
+    password = forms.CharField(widget=forms.PasswordInput)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control'})
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        username = cleaned_data.get('username')
+        password = cleaned_data.get('password')
+        
+        if username and password:
+            user = authenticate(username=username, password=password)
+            if not user:
+                raise forms.ValidationError('Invalid username or password')
+            if not user.is_active:
+                raise forms.ValidationError('Account is not verified')
+            self.user = user
+        return cleaned_data
+    
+    def get_user(self):
+        return getattr(self, 'user', None)
+    
+
+
+class PasswordResetForm(forms.Form):
+    """
+    Form for password reset request.
+    """
+    email = forms.EmailField()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control'})
+    
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if not User.objects.filter(email=email).exists():
+            raise forms.ValidationError('No account found with this email.')
+        return email
+
+class PasswordResetNewForm(forms.Form):
+    """
+    Form for password change.
+    """
+    new_password1 = forms.CharField(widget=forms.PasswordInput)
+    new_password2 = forms.CharField(widget=forms.PasswordInput)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control'})
+
+class PasswordChangeForm(forms.Form):
+    """
+    Form for password change.
+    """
+    old_password = forms.CharField(widget=forms.PasswordInput)
+    new_password1 = forms.CharField(widget=forms.PasswordInput)
+    new_password2 = forms.CharField(widget=forms.PasswordInput)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control'})
+
+class UserProfileForm(forms.ModelForm):
+    """
+    Form for user profile update.
+    """
+    class Meta:
+        model = UserProfile
+        fields = ['phone', 'bio', 'avatar']
+        widgets = {
+            'bio': forms.Textarea(attrs={'rows': 3}),
+            'avatar': forms.FileInput(attrs={'class': 'form-control', 'accept': '.jpg,.jpeg,.png,.gif'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs.update({'class': 'form-control'}) 

@@ -1,0 +1,42 @@
+{% extends "auth/base_auth.html" %}
+
+{% block auth_content %}
+<h2 class="text-center mb-4">Profile</h2>
+
+<div class="text-center mb-4">
+    {% if user.profile.avatar %}
+        <img src="{{ user.profile.avatar.url }}" alt="Profile Picture" class="rounded-circle" style="width: 150px; height: 150px; object-fit: cover;">
+    {% else %}
+        <div class="bg-secondary rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 150px; height: 150px;">
+            <span class="text-white display-4">{{ user.username.0|upper }}</span>
+        </div>
+    {% endif %}
+</div>
+
+<form method="post" enctype="multipart/form-data" novalidate>
+    {% csrf_token %}
+    
+    {% for field in form %}
+    <div class="mb-3">
+        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+            {% for error in field.errors %}
+                <div class="invalid-feedback d-block">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% if field.help_text %}
+            <div class="form-text">{{ field.help_text }}</div>
+        {% endif %}
+    </div>
+    {% endfor %}
+    
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+        <a href="{% url 'tasks:change_password' %}" class="btn btn-outline-primary">Change Password</a>
+        <a href="{% url 'tasks:project-list' %}" class="btn btn-outline-secondary">Back to Projects</a>
+    </div>
+</form>
+{% endblock %} 

@@ -39,6 +39,11 @@
                                 <li><hr class="dropdown-divider"></li>
                             {% endif %}
                             <li>
+                                <a class="dropdown-item" href="{% url 'tasks:profile' %}">
+                                    <i class="bi bi-person-circle"></i> Profile
+                                </a>
+                            </li>
+                            <li>
                                 <a class="dropdown-item" href="{% url 'tasks:logout' %}">
                                     <i class="bi bi-box-arrow-right"></i> Logout
                                 </a>
@@ -49,7 +54,7 @@
             {% else %}
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        <a class="nav-link" href="{% url 'tasks:login' %}">Login</a>
                     </li>
                 </ul>
             {% endif %}
