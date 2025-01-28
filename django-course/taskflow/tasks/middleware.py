@@ -91,7 +91,7 @@ class QueryDebugMiddleware:
     def __call__(self, request):
         # Clear queries at the start of request
         if settings.DEBUG:
-            connection.queries = []
+            connection.queries.clear()
         
         response = self.get_response(request)
         
