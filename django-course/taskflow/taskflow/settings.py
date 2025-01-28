@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 import os
 from pathlib import Path
 from decouple import config, Csv
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,9 +26,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,6 +45,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'corsheaders',
+    'cloudinary_storage',
+    'cloudinary',
+    'django_redis',
+    'health_check',
     # Local apps
     'tasks',
 ]
@@ -87,13 +92,19 @@ WSGI_APPLICATION = "taskflow.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+else:
+    DATABASES = {
+        "default": dj_database_url.config(
+            default=config('DATABASE_URL')
+        )
+    }
 
 
 # Password validation
@@ -134,9 +145,21 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 
+# Enable whitenoise for static files in production
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Media files
-MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+if DEBUG:
+    MEDIA_URL = '/media/'  # Local media URL
+    MEDIA_ROOT = BASE_DIR / 'media'
+else:
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.RawMediaCloudinaryStorage'  # Use Cloudinary in production
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': config('CLOUDINARY_CLOUD_NAME'),
+        'API_KEY': config('CLOUDINARY_API_KEY'),
+        'API_SECRET': config('CLOUDINARY_API_SECRET'),
+    }
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
