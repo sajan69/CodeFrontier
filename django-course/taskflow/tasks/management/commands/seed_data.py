@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.utils.text import slugify
-from tasks.models import Project, Category, Task
-from django.contrib.auth.models import User
+from django.utils import timezone
+from tasks.models import Project, Category, Task, UserProfile, Comment
 
 class Command(BaseCommand):
     help = 'Seed the database with initial data'
@@ -24,7 +24,7 @@ class Command(BaseCommand):
             self.stdout.write(self.style.ERROR(f'Seed file not found: {file_path}'))
             return
 
-        # Create users first
+        # Create users and their profiles
         users = {}
         for user_data in seed_data.get('users', []):
             user, created = User.objects.get_or_create(
@@ -38,6 +38,16 @@ class Command(BaseCommand):
             user.set_password(user_data.get('password', 'defaultpassword'))
             user.save()
             users[user_data['username']] = user
+
+            # Create or update user profile
+            profile_data = user_data.get('profile', {})
+            UserProfile.objects.update_or_create(
+                user=user,
+                defaults={
+                    'phone': profile_data.get('phone', ''),
+                    'bio': profile_data.get('bio', '')
+                }
+            )
 
         # Create projects
         projects = {}
@@ -82,7 +92,8 @@ class Command(BaseCommand):
             )
             categories[category_data['name']] = category
 
-        # Create tasks
+        # Create tasks and comments
+        tasks = {}
         for task_data in seed_data.get('tasks', []):
             project = projects.get(task_data['project'])
             if not project:
@@ -104,11 +115,25 @@ class Command(BaseCommand):
                     'due_date': task_data.get('due_date')
                 }
             )
+            tasks[task_data['title']] = task
+
+            # Create comments
+            for comment_data in task_data.get('comments', []):
+                author = users.get(comment_data['author'])
+                if author:
+                    Comment.objects.get_or_create(
+                        task=task,
+                        author=author,
+                        content=comment_data['content'],
+                        defaults={
+                            'created_at': timezone.now()
+                        }
+                    )
 
             # Handle task dependencies
             if task_data.get('dependencies'):
                 for dep_title in task_data['dependencies']:
-                    dep_task = Task.objects.filter(title=dep_title, project=project).first()
+                    dep_task = tasks.get(dep_title)
                     if dep_task:
                         task.dependencies.add(dep_task)
 

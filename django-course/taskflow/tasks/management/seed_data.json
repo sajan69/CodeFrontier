@@ -5,35 +5,56 @@
             "email": "sajan.adhikari@example.com",
             "first_name": "Sajan",
             "last_name": "Adhikari",
-            "password": "nepali2024tech"
+            "password": "nepali2024tech",
+            "profile": {
+                "phone": "+977-9841234567",
+                "bio": "Full-stack developer with expertise in Django and React"
+            },
+            "is_superuser": true
         },
         {
             "username": "anika_shrestha",
             "email": "anika.shrestha@example.com",
             "first_name": "Anika",
             "last_name": "Shrestha",
-            "password": "kathmandudev123"
+            "password": "kathmandudev123",
+            "profile": {
+                "phone": "+977-9851234567",
+                "bio": "UI/UX designer passionate about creating intuitive user experiences"
+            }
         },
         {
             "username": "rohan_tamang",
             "email": "rohan.tamang@example.com",
             "first_name": "Rohan",
             "last_name": "Tamang",
-            "password": "design_nepal2024"
+            "password": "design_nepal2024",
+            "profile": {
+                "phone": "+977-9861234567",
+                "bio": "Frontend developer specializing in modern web technologies"
+            }
         },
         {
             "username": "priya_poudel",
             "email": "priya.poudel@example.com",
             "first_name": "Priya",
             "last_name": "Poudel",
-            "password": "productmanager2024"
+            "password": "productmanager2024",
+            "profile": {
+                "phone": "+977-9871234567",
+                "bio": "Product manager with experience in agile methodologies"
+            }
         },
         {
             "username": "bikash_gurung",
             "email": "bikash.gurung@example.com",
             "first_name": "Bikash",
             "last_name": "Gurung",
-            "password": "backend_expert123"
+            "password": "backend_expert123",
+            "profile": {
+                "phone": "+977-9881234567",
+                "bio": "Backend developer focused on scalable system architecture"
+            }
         }
     ],
     "projects": [
@@ -103,7 +124,17 @@
             "assignee": "rohan_tamang",
             "status": "in_progress",
             "priority": 3,
-            "due_date": "2024-03-20T00:00:00Z"
+            "due_date": "2024-03-20T00:00:00Z",
+            "comments": [
+                {
+                    "author": "anika_shrestha",
+                    "content": "I've prepared some wireframes for the registration flow. Let's review them in the next meeting."
+                },
+                {
+                    "author": "sajan_adhikari",
+                    "content": "Make sure to include email verification and OTP functionality in the design."
+                }
+            ]
         },
         {
             "title": "Database Schema Design",
@@ -114,18 +145,13 @@
             "status": "todo",
             "priority": 4,
             "due_date": "2024-03-15T00:00:00Z",
-            "dependencies": ["User Registration Flow Design"]
-        },
-        {
-            "title": "Responsive Dashboard",
-            "description": "Create responsive frontend dashboard for educators",
-            "project": "Nepal Education Platform",
-            "category": "Frontend Development",
-            "assignee": "anika_shrestha",
-            "status": "todo",
-            "priority": 3,
-            "due_date": "2024-04-01T00:00:00Z",
-            "dependencies": ["Database Schema Design"]
+            "dependencies": ["User Registration Flow Design"],
+            "comments": [
+                {
+                    "author": "bikash_gurung",
+                    "content": "Initial schema design is ready. Will share the ERD for review."
+                }
+            ]
         },
         {
             "title": "Agricultural Market Data Collection",
@@ -135,7 +161,13 @@
             "assignee": "priya_poudel",
             "status": "in_progress",
             "priority": 2,
-            "due_date": "2024-03-25T00:00:00Z"
+            "due_date": "2024-03-25T00:00:00Z",
+            "comments": [
+                {
+                    "author": "sajan_adhikari",
+                    "content": "Found some useful APIs for real-time market data. Will document them."
+                }
+            ]
         },
         {
             "title": "Mobile App Prototype",
